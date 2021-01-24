@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
+	<script defer src="font_awesome_all.js"></script>
+	
+</head>
+<body>
+<div class="container">
+	<div class="header">
+		<div class="clear tooltip_clear">
+			<i class="fa fa-sync-alt" aria-hidden="true"></i>
+			<span class="tooltip_text_clear">Clears all the todos permanently</span>
+		</div>
+		<div id="date"></div>
+	</div>
+	<div class="content">
+		<ul id="list"></ul>
+	</div>
+	<div class="add-item">
+		<input type="text" id="input_item" placeholder="Add a TO-DO" name="item">
+		<div class="add_my_todo tooltip_add">
+			<i class="fa fa-plus-circle"></i>
+			<span class="tooltip_text_add">Add my todo item</span>
+		</div>
+	</div>
+</div>
+<script defer src="script.js"></script>
+</body>
+</html>

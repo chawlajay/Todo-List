@@ -1,0 +1,13 @@
+1. querySelector("")
+2. getElementById("")
+3. insertAdjacentHTML(position,text)
+4. addEventListener("keyup",function(event){})
+5. element.classList.toggle(...)
+6. element.parentNode.querySelector("")
+7. element.target
+8. localStorage.setItem('key','value')
+9. localStorage.getItem('key')
+10. JSON.stringify(...)
+11. JSON.parse(...)
+12. localStorage.clear()
+13. location.reload()

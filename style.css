@@ -1,0 +1,205 @@
+body{
+	padding: 0;
+	margin: 0;
+	background-image: linear-gradient(90deg,#A86099,#F58BDE)
+}
+
+.container{
+	margin:auto;
+	width:400px;
+	margin:5px auto;
+}
+
+.header{
+	color: white;
+	width: 400px;
+	height: 200px;
+	background-image: url("cosmic.jpg");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-color: lightblue;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	position: relative;
+	font-family: 'Yeon Sung', cursive;
+}
+
+#date{
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	font-size: 30px;
+}
+
+.tooltip_clear .tooltip_text_clear{
+visibility: hidden;
+background-color:black;
+color: white;
+position:absolute;
+left: 200%;
+border-radius: 5px;
+width:fit-content;
+padding: 2px;
+opacity: 0;
+transition: opacity 1s;
+}
+
+.tooltip_clear:hover .tooltip_text_clear{
+    visibility: visible;
+    opacity: 1;
+}
+
+.clear{
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	right: 20px;
+	top: 20px;
+}
+
+.fa-sync-alt{
+	font-size: 30px;
+}
+
+.fa-sync-alt:hover{
+    cursor: pointer;
+    text-shadow: 1px 3px 5px #000;
+    transform: rotate(45deg);
+}
+
+.content{
+	height: 350px;
+	max-height: 350px;
+	overflow: auto;
+	background-color: white;
+}
+
+.content ul{
+    padding:0;
+    margin:0;
+}
+
+.item{
+    width:380px;
+    min-height: 45px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.item .fa-check-circle, .item .fa-circle{
+    font-size: 25px;
+}
+
+.item .fa-circle:hover , .item .fa-check-circle:hover{
+    cursor: pointer;
+}
+
+.item .fa-check-circle{
+	color:#6eb200;
+}
+
+
+.item p.text{
+    font-size: 20px;
+    background-color: #FFF;
+    width: 280px;
+    overflow-wrap: break-word;
+}
+
+.lineThrough{
+    text-decoration: line-through;
+    color : #ccc;
+}
+
+.item{
+    position:relative;
+}
+
+.tooltip_delete .tooltip_text_delete{
+    visibility: hidden;
+    background-color:black;
+    color: white;
+    position:absolute;
+    left: 75%;
+    bottom: 0%;
+    z-index: 5;
+    border-radius: 5px;
+    width:max-content;
+    padding: 2px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.item .fa-trash-alt{
+    font-size: 25px;
+}
+
+.item .fa-trash-alt:hover{
+color:#af0000;
+cursor: pointer;
+transform: scale(1.2);
+}
+
+.tooltip_delete:hover .tooltip_text_delete{
+    visibility: visible;
+    z-index: 5;
+    opacity: 0.7;
+}
+
+/*Add an item*/
+
+.add-item{
+	background-color: white;
+	border-radius: 0 0 15px 15px;
+    position: relative;
+    width: 380px;
+    height:40px;
+    background-color: #FFF;
+    padding: 10px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.tooltip_add .tooltip_text_add{
+    visibility: hidden;
+    background-color:black;
+    color: white;
+    position:absolute;
+    left: 103%;
+    top:30%;
+    border-radius: 5px;
+    width:fit-content;
+    padding: 2px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.add-item .fa-plus-circle{
+    position: absolute;
+    right:10px;
+    top: 15px;
+    font-size: 30px;
+    color: #4162f6;
+}
+
+.add-item .fa-plus-circle:hover{
+    transform: scale(1.2);
+}
+
+.tooltip_add:hover .tooltip_text_add{
+    visibility: visible;
+    opacity: 1;
+}
+
+.add-item input{
+	position: absolute;
+    left: 10px;
+    height: 35px;
+    width: 330px;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    /* padding-left:10px; */
+}
