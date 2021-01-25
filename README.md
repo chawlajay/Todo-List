@@ -11,3 +11,6 @@ Original Todo list with all commits was created in repository JavaScript_project
 6. On right, a TRASH button is present, which deletes your particular todo from your list of todos.
 7. On top right corner, CLEAR button is present, by clicking that button all your todos will be permanently deleted. "Be Careful with this button".
 8. When CLEAR button is clicked it asks for your final permission to delete all todos or not.
+
+### How it looks !!
+ ![PREVIEW](https://github.com/chawlajay/Todo-List/blob/main/preview.png?raw=true)
