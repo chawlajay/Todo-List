@@ -11,21 +11,19 @@ body{
     float: left;
 }
 
-.event_list{
-    width: 400px;
-    height: 400px;
-    margin-left: 400px;
-    /* margin-top: 150px; */
-    background-color: teal;
-    float: left;
-}
-
 .event_container{
     width: 400px;
     height: 400px;
+    margin-left: 400px;
+    /* background-color: teal; */
+    float: left;
+}
+
+.event_box{
+    width: 400px;
+    height: 400px;
     /* margin-top: 0px; */
-    background-color: teal;
-   
+    /* background-color: teal; */   
 }
 
 .todo_header{
@@ -43,16 +41,15 @@ body{
     font-size: 30px;
 }
 
-#mydiv {
+#event_input_box {
     width: 100%;
     font-size: 20px;
     text-align: right;
     background-color: lightblue;
-    /* visibility: hidden; */
+    visibility: hidden;
 }
 
-#mydiv input[type=text] {
-    /* width: 50%; */
+#event_input_box input[type=text] {
     padding: 5px 5px;
     margin: 5px 0;
     font-size: 20px;
@@ -129,6 +126,15 @@ font-size: 20px;
 	max-height: 350px;
 	overflow: auto;
 	background-color: white;
+}
+
+.list_of_events{
+    height: 300px;
+	max-height: 300px;
+	overflow: auto;
+    background-color: white;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 .content ul{
