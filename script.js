@@ -153,3 +153,16 @@ const toDo = input.value;
 		input.value="";
 		index++;
 });
+
+// Event list functions and code starts here
+let event_input_box=document.getElementById("event_input_box");
+function showEventInputBox(){
+	if(event_input_box.style.visibility=="hidden")
+	{
+		event_input_box.style.visibility="visible";
+	}
+	else
+	{
+		event_input_box.style.visibility="hidden";
+	}
+}

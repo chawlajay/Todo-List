@@ -47,6 +47,8 @@ body{
     text-align: right;
     background-color: lightblue;
     visibility: hidden;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 #event_input_box input[type=text] {
