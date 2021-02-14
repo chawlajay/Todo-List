@@ -155,8 +155,13 @@ const toDo = input.value;
 });
 
 // Event list functions and code starts here
+
 let event_input_box=document.getElementById("event_input_box");
+
 let done_button = document.getElementById("done_button");
+
+let event_list = document.getElementById("event_list");
+
 function showEventInputBox(){
 		event_input_box.style.visibility="visible";
 		done_button.style.visibility="visible";	
@@ -167,8 +172,38 @@ let event_name = document.querySelector("#event_input_box #event_name");
 let event_link = document.querySelector("#event_input_box #event_link");
 let event_time = document.querySelector("#event_input_box #event_time");
 let date_obj= new Date(event_time.value);
-console.log(event_name.value);
-console.log(event_link.value);
-console.log(event_time.value);
+console.log(event_name);
+console.log(event_link);
+console.log(event_time);
+if(event_name.value=="")
+{
+	alert("Event Name field must be filled");
+}
+else if(event_link.value=="")
+{
+	alert("Event Link field must be filled");
+}
+else if(event_time.value=="")
+{
+	alert("Event Time field must be filled");
+}
+else
+{
+const text=`<li class="event_item">
+			<p>${event_name.value}</p>
+			<p>${event_link.value}</p>
+			<p>${event_time.value}</p>
+			</li>`; 
+const position = "afterBegin";   // position where to add a new text when user click enter in the input box after typing a todo item
+
+// adds a li element inside a ul element
+event_list.insertAdjacentHTML(position,text);
+event_name.value="";
+event_link.value="";
+event_time.value="";
+
+event_input_box.style.visibility="hidden";
+done_button.style.visibility="hidden";	
+}
 
 }
