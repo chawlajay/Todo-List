@@ -156,13 +156,19 @@ const toDo = input.value;
 
 // Event list functions and code starts here
 let event_input_box=document.getElementById("event_input_box");
+let done_button = document.getElementById("done_button");
 function showEventInputBox(){
-	if(event_input_box.style.visibility=="hidden")
-	{
 		event_input_box.style.visibility="visible";
-	}
-	else
-	{
-		event_input_box.style.visibility="hidden";
-	}
+		done_button.style.visibility="visible";	
+}
+
+function addMyEvent(){
+let event_name = document.querySelector("#event_input_box #event_name");
+let event_link = document.querySelector("#event_input_box #event_link");
+let event_time = document.querySelector("#event_input_box #event_time");
+let date_obj= new Date(event_time.value);
+console.log(event_name.value);
+console.log(event_link.value);
+console.log(event_time.value);
+
 }

@@ -38,11 +38,11 @@
 				</tr>
 				<tr>
 					<td><label>Link:</label></td>
-					<td><input type="text" name="event_item" id="event_link" placeholder="Add event link (if any)"></td>
+					<td><input type="url" name="event_item" id="event_link" placeholder="Add event link (if any)"></td>
 				</tr>
 				<tr>
 					<td><label>Time:</label></td>
-					<td><input type="text" name="event_item" id="event_time" placeholder="Add event time to attend"></td>
+					<td><input type="datetime-local" name="event_item" id="event_time" placeholder="Add event time to attend"></td>
 				</tr>
 			</table>
 		</div>
@@ -52,7 +52,8 @@
 				<div class="clear_events clear_events_tooltip">
 					<i class="fa fa-sync-alt" aria-hidden="true"></i>
 				</div>
-				<button onclick="showEventInputBox()">Add Event</button>
+				<button onclick="showEventInputBox()"><b>Add Event</b></button>
+				<button onclick="addMyEvent()" id="done_button"><b>Done</b></button>
 			</div>
 			<div class="list_of_events">
 				<ul id="event_list"></ul>
