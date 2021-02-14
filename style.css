@@ -11,21 +11,6 @@ body{
     float: left;
 }
 
-.event_container{
-    width: 400px;
-    height: 400px;
-    margin-left: 400px;
-    /* background-color: teal; */
-    float: left;
-}
-
-.event_box{
-    width: 400px;
-    height: 400px;
-    /* margin-top: 0px; */
-    /* background-color: teal; */   
-}
-
 .todo_header{
 	color: white;
 	width: 400px;
@@ -39,50 +24,6 @@ body{
 	position: relative;
     font-family: 'Yeon Sung', cursive;
     font-size: 30px;
-}
-
-#event_input_box {
-    width: 100%;
-    font-size: 20px;
-    text-align: right;
-    background-color: lightblue;
-    visibility: hidden;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-#event_input_box input[type=text] {
-    padding: 5px 5px;
-    margin: 5px 0;
-    font-size: 20px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}  
-
-.event_header{
-    width: 400px;
-    height: 100px;
-    color:white;
-    background-color: blue;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    position: relative;
-    font-family: 'Yeon Sung', cursive;
-    font-size: 30px;
-}
-
-.event_header p{
-    margin:0;
-    padding-left: 10px;
-}
-
-.event_header button{
-    width: 100px;
-    height:30px;
-    margin-left: 10px;
-    cursor: pointer;
 }
 
 #date{
@@ -110,14 +51,6 @@ font-size: 20px;
     opacity: 1;
 }
 
-.clear , .clear_events{
-	width: 30px;
-	height: 30px;
-	position: absolute;
-	right: 20px;
-	top: 20px;
-}
-
 .fa-sync-alt:hover{
     cursor: pointer;
     transform: rotate(45deg);
@@ -128,15 +61,6 @@ font-size: 20px;
 	max-height: 350px;
 	overflow: auto;
 	background-color: white;
-}
-
-.list_of_events{
-    height: 300px;
-	max-height: 300px;
-	overflow: auto;
-    background-color: white;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
 }
 
 .content ul{
@@ -266,4 +190,80 @@ transform: scale(1.2);
     background-color: transparent;
     border: none;
     font-size: 20px;
+}
+
+/* Event list  */
+.event_container{
+    width: 400px;
+    height: 400px;
+    margin-left: 400px;
+    /* background-color: teal; */
+    float: left;
+}
+
+.event_box{
+    width: 400px;
+    height: 400px;
+    /* margin-top: 0px; */
+    /* background-color: teal; */   
+}
+.list_of_events{
+    height: 300px;
+	max-height: 300px;
+	overflow: auto;
+    background-color: white;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.clear , .clear_events{
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	right: 20px;
+	top: 20px;
+}
+
+#event_input_box {
+    width: 100%;
+    font-size: 20px;
+    text-align: right;
+    background-color: lightblue;
+    visibility: hidden;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+#event_input_box input[type=text] {
+    padding: 5px 5px;
+    margin: 5px 0;
+    font-size: 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}  
+
+.event_header{
+    width: 400px;
+    height: 100px;
+    color:white;
+    background-color: blue;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    position: relative;
+    font-family: 'Yeon Sung', cursive;
+    font-size: 30px;
+}
+
+.event_header p{
+    margin:0;
+    padding-left: 10px;
+}
+
+.event_header button{
+    width: 100px;
+    height:30px;
+    margin-left: 10px;
+    cursor: pointer;
 }
