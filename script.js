@@ -172,38 +172,43 @@ let event_name = document.querySelector("#event_input_box #event_name");
 let event_link = document.querySelector("#event_input_box #event_link");
 let event_time = document.querySelector("#event_input_box #event_time");
 let date_obj= new Date(event_time.value);
-console.log(event_name);
-console.log(event_link);
-console.log(event_time);
-if(event_name.value=="")
+const hours = date_obj.getHours();
+const minutes = date_obj.getMinutes();
+const my_date = date_obj.getDate();
+const my_month = date_obj.getMonth();
+const my_year = date_obj.getFullYear();
+// console.log(event_name);
+// console.log(event_link);
+// console.log(event_time);
+if(event_name.value=="" || event_time.value=="")
 {
-	alert("Event Name field must be filled");
-}
-else if(event_link.value=="")
-{
-	alert("Event Link field must be filled");
-}
-else if(event_time.value=="")
-{
-	alert("Event Time field must be filled");
+	alert("Your event can't be added as Event Name and Event Time must be filled.");
 }
 else
 {
 const text=`<li class="event_item">
-			<p>${event_name.value}</p>
-			<p>${event_link.value}</p>
-			<p>${event_time.value}</p>
+			<div class="div_edit_delete check_flex">
+				<div class="edit_event"><button>Edit</button></div>
+				<div class="delete_event"><button>Delete</button></div>
+			</div>
+			<div class="div_name_link check_flex">
+				<div>${event_name.value}</div>
+				<div>${event_link.value}</div>
+			</div>
+			<div class="div_date_time check_flex">
+				<div>${((hours<10)?('0'+ hours):(hours)) + ":" + ((minutes<10)?('0'+ minutes):(minutes))}</div>
+				<div>${((my_date<10)?('0'+ my_date):(my_date)) + "-" + ((my_month<9)?('0'+ (my_month+1)):(my_month+1)) + "-" + my_year}</div>
+			</div>
 			</li>`; 
 const position = "afterBegin";   // position where to add a new text when user click enter in the input box after typing a todo item
 
 // adds a li element inside a ul element
 event_list.insertAdjacentHTML(position,text);
-event_name.value="";
-event_link.value="";
-event_time.value="";
-
-event_input_box.style.visibility="hidden";
-done_button.style.visibility="hidden";	
 }
 
+event_name.value="";
+event_link.value="";
+event_time.value="";	
+event_input_box.style.visibility="hidden";
+done_button.style.visibility="hidden";
 }

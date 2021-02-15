@@ -76,6 +76,7 @@ font-size: 20px;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    position:relative;
 }
 
 .item .fa-check-circle, .item .fa-circle{
@@ -101,10 +102,6 @@ font-size: 20px;
 .lineThrough{
     text-decoration: line-through;
     color : #ccc;
-}
-
-.item{
-    position:relative;
 }
 
 .tooltip_delete .tooltip_text_delete{
@@ -264,11 +261,41 @@ transform: scale(1.2);
 	top: 20px;
 }
 
-.list_of_events{
+.div_list_of_events{
     height: 300px;
 	max-height: 300px;
 	overflow: auto;
     background-color: white;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
+}
+
+.event_item{
+    width:380px;
+    min-height: 45px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    list-style: none;
+    display: flex;
+    justify-content:space-evenly;
+    align-items: center;
+    position:relative;
+}
+
+.div_list_of_events ul{
+    padding: 0px;
+}
+
+.check_flex{
+    display: flex;
+    flex-direction: column;
+}
+
+.edit_event button{
+    cursor:pointer;
+    margin: 2px;
+}
+
+.delete_event button{
+    cursor:pointer;
+    margin: 2px;
 }
