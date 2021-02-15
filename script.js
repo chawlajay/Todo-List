@@ -162,16 +162,72 @@ let done_button = document.getElementById("done_button");
 
 let event_list = document.getElementById("event_list");
 
+let EVENT_ARRAY, event_index;
+
+let event_data = localStorage.getItem("EVENT_LIST");
+if(event_data)
+{
+	EVENT_ARRAY = JSON.parse(event_data);
+	loadEvents(EVENT_ARRAY);
+	event_index = EVENT_ARRAY.length;
+}
+else
+{
+	EVENT_ARRAY = [];
+	event_index = 0;
+}
+
+function loadEvents(arr){
+
+	arr.forEach(item => {
+		addMyEvent(item.id,item.name,item.link,item.time);
+	});
+
+}
+
 function showEventInputBox(){
 		event_input_box.style.visibility="visible";
 		done_button.style.visibility="visible";	
 }
 
-function addMyEvent(){
-let event_name = document.querySelector("#event_input_box #event_name");
-let event_link = document.querySelector("#event_input_box #event_link");
-let event_time = document.querySelector("#event_input_box #event_time");
-let date_obj= new Date(event_time.value);
+function add_or_discard_event(){
+
+	let event_name = document.querySelector("#event_input_box #event_name");
+	let event_link = document.querySelector("#event_input_box #event_link");
+	let event_time = document.querySelector("#event_input_box #event_time");
+
+	if(event_name.value=="" || event_time.value=="")
+	{
+		alert("Your event can't be added as Event Name and Event Time must be filled.");
+	}
+	else
+	{
+		addMyEvent(event_index,event_name.value,event_link.value,event_time.value);
+		
+		EVENT_ARRAY.push(
+			{
+				id: event_index,
+				name: event_name.value,
+				link: event_link.value,
+				time: event_time.value
+			}
+		);
+		event_index++;
+		localStorage.setItem("EVENT_LIST",JSON.stringify(EVENT_ARRAY));
+
+		event_name.value="";
+		event_link.value="";
+		event_time.value="";	
+		event_input_box.style.visibility="hidden";
+		done_button.style.visibility="hidden";
+		
+	}
+
+}
+
+function addMyEvent(event_index,event_name,event_link,event_time){
+
+let date_obj= new Date(event_time);
 const hours = date_obj.getHours();
 const minutes = date_obj.getMinutes();
 const my_date = date_obj.getDate();
@@ -180,35 +236,23 @@ const my_year = date_obj.getFullYear();
 // console.log(event_name);
 // console.log(event_link);
 // console.log(event_time);
-if(event_name.value=="" || event_time.value=="")
-{
-	alert("Your event can't be added as Event Name and Event Time must be filled.");
-}
-else
-{
-const text=`<li class="event_item">
+
+const text=`<li class="event_item" id="${event_index}">
 			<div class="div_edit_delete check_flex">
-				<div class="edit_event"><button>Edit</button></div>
-				<div class="delete_event"><button>Delete</button></div>
+				<div id="edit_event"><button>Edit</button></div>
+				<div id="delete_event"><button>Delete</button></div>
 			</div>
 			<div class="div_name_link check_flex">
-				<div>${event_name.value}</div>
-				<div>${event_link.value}</div>
+				<div id="div_name">${event_name}</div>
+				<div id="div_link">${event_link}</div>
 			</div>
 			<div class="div_date_time check_flex">
-				<div>${((hours<10)?('0'+ hours):(hours)) + ":" + ((minutes<10)?('0'+ minutes):(minutes))}</div>
-				<div>${((my_date<10)?('0'+ my_date):(my_date)) + "-" + ((my_month<9)?('0'+ (my_month+1)):(my_month+1)) + "-" + my_year}</div>
+				<div id="div_date">${((hours<10)?('0'+ hours):(hours)) + ":" + ((minutes<10)?('0'+ minutes):(minutes))}</div>
+				<div id="div_time">${((my_date<10)?('0'+ my_date):(my_date)) + "-" + ((my_month<9)?('0'+ (my_month+1)):(my_month+1)) + "-" + my_year}</div>
 			</div>
 			</li>`; 
 const position = "afterBegin";   // position where to add a new text when user click enter in the input box after typing a todo item
 
 // adds a li element inside a ul element
 event_list.insertAdjacentHTML(position,text);
-}
-
-event_name.value="";
-event_link.value="";
-event_time.value="";	
-event_input_box.style.visibility="hidden";
-done_button.style.visibility="hidden";
 }

@@ -290,12 +290,12 @@ transform: scale(1.2);
     flex-direction: column;
 }
 
-.edit_event button{
+#edit_event button{
     cursor:pointer;
     margin: 2px;
 }
 
-.delete_event button{
+#delete_event button{
     cursor:pointer;
     margin: 2px;
 }
