@@ -154,7 +154,7 @@ const toDo = input.value;
 		index++;
 });
 
-// Event list functions and code starts here
+// <-------------- Event list functions and code starts here ----------------->
 
 let event_input_box=document.getElementById("event_input_box");
 
@@ -180,7 +180,7 @@ else
 function loadEvents(arr){
 
 	arr.forEach(item => {
-		addMyEvent(item.id,item.name,item.link,item.time);
+		addMyEvent(item.id,item.name,item.link,item.time,item.trash);
 	});
 
 }
@@ -202,17 +202,18 @@ function add_or_discard_event(){
 	}
 	else
 	{
-		addMyEvent(event_index,event_name.value,event_link.value,event_time.value);
+		addMyEvent(event_index,event_name.value,event_link.value,event_time.value,false);
 		
 		EVENT_ARRAY.push(
 			{
 				id: event_index,
 				name: event_name.value,
 				link: event_link.value,
-				time: event_time.value
+				time: event_time.value,
+				trash: false
 			}
 		);
-		event_index++;
+		event_index = EVENT_ARRAY.length;
 		localStorage.setItem("EVENT_LIST",JSON.stringify(EVENT_ARRAY));
 
 		event_name.value="";
@@ -225,8 +226,11 @@ function add_or_discard_event(){
 
 }
 
-function addMyEvent(event_index,event_name,event_link,event_time){
-
+function addMyEvent(event_index,event_name,event_link,event_time,event_trash){
+if(event_trash)
+{
+	return;
+}
 let date_obj= new Date(event_time);
 const hours = date_obj.getHours();
 const minutes = date_obj.getMinutes();
@@ -239,16 +243,16 @@ const my_year = date_obj.getFullYear();
 
 const text=`<li class="event_item" id="${event_index}">
 			<div class="div_edit_delete check_flex">
-				<div id="edit_event"><button>Edit</button></div>
-				<div id="delete_event"><button>Delete</button></div>
+				<div class="edit_event" id="${event_index}"><button>Edit</button></div>
+				<div class="delete_event" id="${event_index}"><button>Delete</button></div>
 			</div>
 			<div class="div_name_link check_flex">
-				<div id="div_name">${event_name}</div>
-				<div id="div_link">${event_link}</div>
+				<div class="div_name">${event_name}</div>
+				<div class="div_link">${event_link}</div>
 			</div>
 			<div class="div_date_time check_flex">
-				<div id="div_date">${((hours<10)?('0'+ hours):(hours)) + ":" + ((minutes<10)?('0'+ minutes):(minutes))}</div>
-				<div id="div_time">${((my_date<10)?('0'+ my_date):(my_date)) + "-" + ((my_month<9)?('0'+ (my_month+1)):(my_month+1)) + "-" + my_year}</div>
+				<div class="div_date">${((hours<10)?('0'+ hours):(hours)) + ":" + ((minutes<10)?('0'+ minutes):(minutes))}</div>
+				<div class="div_time">${((my_date<10)?('0'+ my_date):(my_date)) + "-" + ((my_month<9)?('0'+ (my_month+1)):(my_month+1)) + "-" + my_year}</div>
 			</div>
 			</li>`; 
 const position = "afterBegin";   // position where to add a new text when user click enter in the input box after typing a todo item
@@ -256,3 +260,31 @@ const position = "afterBegin";   // position where to add a new text when user c
 // adds a li element inside a ul element
 event_list.insertAdjacentHTML(position,text);
 }
+
+function removeEvent(curr_element,curr_id){
+	EVENT_ARRAY[curr_id].trash = true;
+	localStorage.setItem("EVENT_LIST",JSON.stringify(EVENT_ARRAY));
+	curr_element.parentNode.parentNode.parentNode.parentNode.removeChild(curr_element.parentNode.parentNode.parentNode);
+}
+
+event_list.addEventListener('click', (event)=>{
+let curr_element = event.target;
+const ele_class = curr_element.parentNode.attributes.class.value;
+
+if(ele_class=="edit_event" || ele_class=="delete_event")
+{
+// console.log(curr_element.parentNode.attributes.id.value);
+const curr_id = curr_element.parentNode.attributes.id.value;
+
+	if(ele_class == "delete_event")
+	{
+		var ask_once = confirm("Are you sure you want to delete this event?");
+		if(ask_once == true)
+		{
+			console.log(curr_id);
+			console.log(EVENT_ARRAY[curr_id]);
+			removeEvent(curr_element,curr_id);
+		}
+	}
+}
+});
