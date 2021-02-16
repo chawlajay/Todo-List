@@ -268,6 +268,27 @@ transform: scale(1.2);
 	top: 20px;
 }
 
+.clear_events #clear_events_tooltip_text{
+    visibility: hidden;
+    background-color:black;
+    color: white;
+    position:absolute;
+    left: -200%;
+    top:120%;
+    border-radius: 5px;
+    width:fit-content;
+    padding: 2px;
+    opacity: 0;
+    transition: opacity 1s;
+    font-size: 20px;
+    z-index: 2;
+}
+    
+.clear_events:hover #clear_events_tooltip_text{
+        visibility: visible;
+        opacity: 1;
+}
+
 .div_list_of_events{
     height: 300px;
 	max-height: 300px;
