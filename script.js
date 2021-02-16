@@ -128,7 +128,7 @@ clear.addEventListener("click",()=>{
 	var ask_once = confirm("Are you sure you want to delete all the todos you entered ?");
 	if(ask_once==true)
 	{
-	localStorage.clear();
+		localStorage.removeItem("TODO");
 	location.reload();      // reload the page
 	}
 });
@@ -154,16 +154,18 @@ const toDo = input.value;
 		index++;
 });
 
-// <-------------- Event list functions and code starts here ----------------->
+// <-------------- Event list functions and code starts here ---------------------->
 
 let event_input_box=document.getElementById("event_input_box");
 
 let done_button = document.getElementById("done_button");
 
+let edit_done_button = document.getElementById("edit_done_button");
+
 let event_list = document.getElementById("event_list");
 
 let clear_all_events = document.querySelector(".clear_events");
-let EVENT_ARRAY, event_index;
+let EVENT_ARRAY, event_index, edit_id;
 
 let event_data = localStorage.getItem("EVENT_LIST");
 if(event_data)
@@ -189,6 +191,14 @@ function loadEvents(arr){
 function showEventInputBox(){
 		event_input_box.style.visibility="visible";
 		done_button.style.visibility="visible";	
+		edit_done_button.style.visibility="hidden";
+		
+		let event_name = document.querySelector("#event_input_box #event_name");
+		let event_link = document.querySelector("#event_input_box #event_link");
+		let event_time = document.querySelector("#event_input_box #event_time");
+		event_name.value="";
+		event_link.value="";
+		event_time.value="";
 }
 
 function add_or_discard_event(){
@@ -203,6 +213,7 @@ function add_or_discard_event(){
 	}
 	else
 	{
+		event_link.value = (event_link.value == "")? "#" : event_link.value;
 		addMyEvent(event_index,event_name.value,event_link.value,event_time.value,false);
 		
 		EVENT_ARRAY.push(
@@ -216,15 +227,12 @@ function add_or_discard_event(){
 		);
 		event_index = EVENT_ARRAY.length;
 		localStorage.setItem("EVENT_LIST",JSON.stringify(EVENT_ARRAY));
-
-		event_name.value="";
-		event_link.value="";
-		event_time.value="";	
-		event_input_box.style.visibility="hidden";
-		done_button.style.visibility="hidden";
-		
 	}
-
+	event_name.value="";
+	event_link.value="";
+	event_time.value="";	
+	event_input_box.style.visibility="hidden";
+	done_button.style.visibility="hidden";
 }
 
 function addMyEvent(event_index,event_name,event_link,event_time,event_trash){
@@ -248,12 +256,11 @@ const text=`<li class="event_item" id="${event_index}">
 				<div class="delete_event" id="${event_index}"><button>Delete</button></div>
 			</div>
 			<div class="div_name_link check_flex">
-				<div class="div_name">${event_name}</div>
-				<div class="div_link">${event_link}</div>
+				<div class="div_event_name"><a href="${event_link}" target="_blank">${event_name}</a></div>
 			</div>
 			<div class="div_date_time check_flex">
-				<div class="div_date">${((hours<10)?('0'+ hours):(hours)) + ":" + ((minutes<10)?('0'+ minutes):(minutes))}</div>
-				<div class="div_time">${((my_date<10)?('0'+ my_date):(my_date)) + "-" + ((my_month<9)?('0'+ (my_month+1)):(my_month+1)) + "-" + my_year}</div>
+				<div class="div_event_date">${((hours<10)?('0'+ hours):(hours)) + ":" + ((minutes<10)?('0'+ minutes):(minutes))}</div>
+				<div class="div_event_time">${((my_date<10)?('0'+ my_date):(my_date)) + "-" + ((my_month<9)?('0'+ (my_month+1)):(my_month+1)) + "-" + my_year}</div>
 			</div>
 			</li>`; 
 const position = "afterBegin";   // position where to add a new text when user click enter in the input box after typing a todo item
@@ -266,6 +273,60 @@ function removeEvent(curr_element,curr_id){
 	EVENT_ARRAY[curr_id].trash = true;
 	localStorage.setItem("EVENT_LIST",JSON.stringify(EVENT_ARRAY));
 	curr_element.parentNode.parentNode.parentNode.parentNode.removeChild(curr_element.parentNode.parentNode.parentNode);
+}
+
+function editEvent(curr_id){
+	event_input_box.style.visibility="visible";
+	edit_done_button.style.visibility="visible";	
+	done_button.style.visibility="hidden";	
+	let event_name = document.querySelector("#event_input_box #event_name");
+	let event_link = document.querySelector("#event_input_box #event_link");
+	let event_time = document.querySelector("#event_input_box #event_time");
+
+	edit_id=curr_id;
+	event_name.value=EVENT_ARRAY[curr_id].name;
+	event_link.value=EVENT_ARRAY[curr_id].link;
+	event_time.value=EVENT_ARRAY[curr_id].time;
+}
+
+function modifyEvent(){
+	let event_name = document.querySelector("#event_input_box #event_name");
+	let event_link = document.querySelector("#event_input_box #event_link");
+	let event_time = document.querySelector("#event_input_box #event_time");
+	let my_li_elem;
+	for(let i=0;i<event_list.children.length;i++)
+	{
+	// console.log(event_list.children[i].attributes.id.value);
+		if(event_list.children[i].attributes.id.value == edit_id)
+		{
+			my_li_elem = event_list.children[i];
+			break;
+		}
+	}
+
+	EVENT_ARRAY[edit_id].name=event_name.value;
+	EVENT_ARRAY[edit_id].link=event_link.value;
+	EVENT_ARRAY[edit_id].time=event_time.value;
+
+	my_li_elem.children[1].children[0].innerHTML = event_name.value;
+	my_li_elem.children[1].children[1].innerHTML = event_link.value;
+
+	let date_obj= new Date(event_time.value);
+	const hours = date_obj.getHours();
+	const minutes = date_obj.getMinutes();
+	const my_date = date_obj.getDate();
+	const my_month = date_obj.getMonth();
+	const my_year = date_obj.getFullYear();
+
+	my_li_elem.children[2].children[0].innerHTML = ((hours<10)?('0'+ hours):(hours)) + ":" + ((minutes<10)?('0'+ minutes):(minutes));
+	my_li_elem.children[2].children[1].innerHTML = ((my_date<10)?('0'+ my_date):(my_date)) + "-" + ((my_month<9)?('0'+ (my_month+1)):(my_month+1)) + "-" + my_year;
+
+	localStorage.setItem("EVENT_LIST",JSON.stringify(EVENT_ARRAY));
+	event_name.value="";
+	event_link.value="";
+	event_time.value="";
+	event_input_box.style.visibility="hidden";
+	edit_done_button.style.visibility="hidden";
 }
 
 event_list.addEventListener('click', (event)=>{
@@ -282,10 +343,14 @@ const curr_id = curr_element.parentNode.attributes.id.value;
 		var ask_once = confirm("Are you sure you want to delete this event?");
 		if(ask_once == true)
 		{
-			console.log(curr_id);
-			console.log(EVENT_ARRAY[curr_id]);
+			// console.log(curr_id);
+			// console.log(EVENT_ARRAY[curr_id]);
 			removeEvent(curr_element,curr_id);
 		}
+	}
+	else
+	{
+		editEvent(curr_id);
 	}
 }
 });
