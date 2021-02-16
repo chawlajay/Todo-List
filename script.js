@@ -162,6 +162,7 @@ let done_button = document.getElementById("done_button");
 
 let event_list = document.getElementById("event_list");
 
+let clear_all_events = document.querySelector(".clear_events");
 let EVENT_ARRAY, event_index;
 
 let event_data = localStorage.getItem("EVENT_LIST");
@@ -287,4 +288,13 @@ const curr_id = curr_element.parentNode.attributes.id.value;
 		}
 	}
 }
+});
+
+clear_all_events.addEventListener("click",()=>{
+	var ask_once = confirm("Are you sure you want to delete all the Events?");
+	if(ask_once==true)
+	{
+		localStorage.removeItem("EVENT_LIST");
+		location.reload();      // reload the page
+	}
 });
