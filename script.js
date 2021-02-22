@@ -165,6 +165,8 @@ let edit_done_button = document.getElementById("edit_done_button");
 let event_list = document.getElementById("event_list");
 
 let clear_all_events = document.querySelector(".clear_events");
+
+let add_event_button = document.getElementById("add_event_button");
 let EVENT_ARRAY, event_index, edit_id;
 
 let event_data = localStorage.getItem("EVENT_LIST");
@@ -192,7 +194,7 @@ function showEventInputBox(){
 		event_input_box.style.visibility="visible";
 		done_button.style.visibility="visible";	
 		edit_done_button.style.visibility="hidden";
-		
+		add_event_button.style.visibility="hidden";
 		let event_name = document.querySelector("#event_input_box #event_name");
 		let event_link = document.querySelector("#event_input_box #event_link");
 		let event_time = document.querySelector("#event_input_box #event_time");
@@ -233,6 +235,7 @@ function add_or_discard_event(){
 	event_time.value="";	
 	event_input_box.style.visibility="hidden";
 	done_button.style.visibility="hidden";
+	add_event_button.style.visibility="visible";
 }
 
 function addMyEvent(event_index,event_name,event_link,event_time,event_trash){
@@ -251,16 +254,16 @@ const my_year = date_obj.getFullYear();
 // console.log(event_time);
 
 const text=`<li class="event_item" id="${event_index}">
-			<div class="div_edit_delete check_flex">
-				<div class="edit_event" id="${event_index}"><button>Edit</button></div>
-				<div class="delete_event" id="${event_index}"><button>Delete</button></div>
-			</div>
 			<div class="div_name_link check_flex">
 				<div class="div_event_name"><a href="${event_link}" target="_blank">${event_name}</a></div>
 			</div>
 			<div class="div_date_time check_flex">
 				<div class="div_event_date">${((hours<10)?('0'+ hours):(hours)) + ":" + ((minutes<10)?('0'+ minutes):(minutes))}</div>
 				<div class="div_event_time">${((my_date<10)?('0'+ my_date):(my_date)) + "-" + ((my_month<9)?('0'+ (my_month+1)):(my_month+1)) + "-" + my_year}</div>
+			</div>
+			<div class="div_edit_delete check_flex">
+				<div class="edit_event" id="${event_index}"><button>Edit</button></div>
+				<div class="delete_event" id="${event_index}"><button>Delete</button></div>
 			</div>
 			</li>`; 
 const position = "afterBegin";   // position where to add a new text when user click enter in the input box after typing a todo item
@@ -277,7 +280,8 @@ function removeEvent(curr_element,curr_id){
 
 function editEvent(curr_id){
 	event_input_box.style.visibility="visible";
-	edit_done_button.style.visibility="visible";	
+	edit_done_button.style.visibility="visible";
+	add_event_button.style.visibility="hidden";	
 	done_button.style.visibility="hidden";	
 	let event_name = document.querySelector("#event_input_box #event_name");
 	let event_link = document.querySelector("#event_input_box #event_link");
@@ -308,9 +312,10 @@ function modifyEvent(){
 	EVENT_ARRAY[edit_id].link=event_link.value;
 	EVENT_ARRAY[edit_id].time=event_time.value;
 
-	my_li_elem.children[1].children[0].innerHTML = event_name.value;
-	my_li_elem.children[1].children[1].innerHTML = event_link.value;
-
+	//console.log(my_li_elem.children[1].children[0].children[0].innerHTML);
+	my_li_elem.children[0].children[0].children[0].innerHTML = event_name.value;
+	my_li_elem.children[0].children[0].children[0].attributes.href.value = event_link.value;
+	
 	let date_obj= new Date(event_time.value);
 	const hours = date_obj.getHours();
 	const minutes = date_obj.getMinutes();
@@ -318,8 +323,8 @@ function modifyEvent(){
 	const my_month = date_obj.getMonth();
 	const my_year = date_obj.getFullYear();
 
-	my_li_elem.children[2].children[0].innerHTML = ((hours<10)?('0'+ hours):(hours)) + ":" + ((minutes<10)?('0'+ minutes):(minutes));
-	my_li_elem.children[2].children[1].innerHTML = ((my_date<10)?('0'+ my_date):(my_date)) + "-" + ((my_month<9)?('0'+ (my_month+1)):(my_month+1)) + "-" + my_year;
+	my_li_elem.children[1].children[0].innerHTML = ((hours<10)?('0'+ hours):(hours)) + ":" + ((minutes<10)?('0'+ minutes):(minutes));
+	my_li_elem.children[1].children[1].innerHTML = ((my_date<10)?('0'+ my_date):(my_date)) + "-" + ((my_month<9)?('0'+ (my_month+1)):(my_month+1)) + "-" + my_year;
 
 	localStorage.setItem("EVENT_LIST",JSON.stringify(EVENT_ARRAY));
 	event_name.value="";
@@ -327,6 +332,7 @@ function modifyEvent(){
 	event_time.value="";
 	event_input_box.style.visibility="hidden";
 	edit_done_button.style.visibility="hidden";
+	add_event_button.style.visibility="visible";
 }
 
 event_list.addEventListener('click', (event)=>{

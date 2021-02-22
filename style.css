@@ -253,12 +253,13 @@ transform: scale(1.2);
 .event_header #done_button{
     visibility: hidden;
     position: relative;
+    left: -120px;
 }
 
 .event_header #edit_done_button{
     visibility: hidden;
     position: relative;
-    left: -120px;
+    left: -240px;
 }
 
 .clear , .clear_events{
@@ -315,11 +316,12 @@ transform: scale(1.2);
 
 .div_name_link{
     margin: 0 5%;
-    width:50%;
+    width:40%;
 }
 
 .div_date_time{
     width: 20%;
+    margin-right: 10%;
 }
 .div_list_of_events ul{
     padding: 0px;
