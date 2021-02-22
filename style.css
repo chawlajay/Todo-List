@@ -193,7 +193,8 @@ transform: scale(1.2);
 .event_container{
     width: 400px;
     height: 400px;
-    margin-left: 400px;
+    margin-top:20px;
+    margin-left: 300px;
     /* background-color: teal; */
     float: left;
 }
@@ -204,8 +205,8 @@ transform: scale(1.2);
     text-align: left;
     background-color: lightblue;
     visibility: hidden;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-radius:15px;
+    margin-bottom:10px;
 }
 
 #event_input_box input[type=text] , #event_input_box input[type=datetime-local] , #event_input_box input[type=url] {
@@ -226,7 +227,7 @@ transform: scale(1.2);
 }
 
 .event_header{
-    width: 400px;
+    width: 100%;
     height: 100px;
     color:white;
     background-color: blue;
@@ -294,8 +295,6 @@ transform: scale(1.2);
 	max-height: 300px;
 	overflow: auto;
     background-color: white;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
 }
 
 #event_list li{
@@ -341,4 +340,11 @@ transform: scale(1.2);
     cursor:pointer;
     margin-left: 10%;
     margin-bottom: 5%;
+}
+
+.extra_div{
+    height: 30px;
+    background-color: blue;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
