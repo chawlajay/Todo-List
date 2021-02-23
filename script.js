@@ -200,7 +200,11 @@ function showEventInputBox(){
 		let event_time = document.querySelector("#event_input_box #event_time");
 		event_name.value="";
 		event_link.value="";
-		event_time.value="";
+		// event_time.value="";
+}
+
+function scroll_to_top_li_item(){
+	event_list.children[0].scrollIntoView({ behavior: 'smooth' });
 }
 
 function add_or_discard_event(){
@@ -230,6 +234,7 @@ function add_or_discard_event(){
 		event_index = EVENT_ARRAY.length;
 		localStorage.setItem("EVENT_LIST",JSON.stringify(EVENT_ARRAY));
 	}
+	scroll_to_top_li_item();
 	event_name.value="";
 	event_link.value="";
 	event_time.value="";	
@@ -258,8 +263,8 @@ const text=`<li class="event_item" id="${event_index}">
 				<div class="div_event_name"><a href="${event_link}" target="_blank">${event_name}</a></div>
 			</div>
 			<div class="div_date_time check_flex">
-				<div class="div_event_date">${((hours<10)?('0'+ hours):(hours)) + ":" + ((minutes<10)?('0'+ minutes):(minutes))}</div>
-				<div class="div_event_time">${((my_date<10)?('0'+ my_date):(my_date)) + "-" + ((my_month<9)?('0'+ (my_month+1)):(my_month+1)) + "-" + my_year}</div>
+				<div class="div_event_time">${((hours<10)?('0'+ hours):(hours)) + ":" + ((minutes<10)?('0'+ minutes):(minutes))}</div>
+				<div class="div_event_date">${((my_date<10)?('0'+ my_date):(my_date)) + "-" + ((my_month<9)?('0'+ (my_month+1)):(my_month+1)) + "-" + my_year}</div>
 			</div>
 			<div class="div_edit_delete check_flex">
 				<div class="edit_event" id="${event_index}"><button>Edit</button></div>
