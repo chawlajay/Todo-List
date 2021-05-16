@@ -1,16 +1,21 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body{
 	padding: 0;
 	margin: 0;
-	background-image: linear-gradient(90deg,#A86099,#F58BDE)
+	background-image: linear-gradient(90deg,#3B8275,#1BB598)
 }
 
-.container{
-	margin:auto;
+.todo_container{
 	width:400px;
-	margin:5px auto;
+    margin-top:5px;
+    margin-left: 100px;
+    float: left;
 }
 
-.header{
+.todo_header{
 	color: white;
 	width: 400px;
 	height: 200px;
@@ -21,14 +26,14 @@ body{
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
 	position: relative;
-	font-family: 'Yeon Sung', cursive;
+    font-family: 'Yeon Sung', cursive;
+    font-size: 30px;
 }
 
 #date{
 	position: absolute;
 	top: 10px;
 	left: 10px;
-	font-size: 30px;
 }
 
 .tooltip_clear .tooltip_text_clear{
@@ -42,6 +47,7 @@ width:fit-content;
 padding: 2px;
 opacity: 0;
 transition: opacity 1s;
+font-size: 20px;
 }
 
 .tooltip_clear:hover .tooltip_text_clear{
@@ -49,21 +55,8 @@ transition: opacity 1s;
     opacity: 1;
 }
 
-.clear{
-	width: 30px;
-	height: 30px;
-	position: absolute;
-	right: 20px;
-	top: 20px;
-}
-
-.fa-sync-alt{
-	font-size: 30px;
-}
-
 .fa-sync-alt:hover{
     cursor: pointer;
-    text-shadow: 1px 3px 5px #000;
     transform: rotate(45deg);
 }
 
@@ -87,6 +80,7 @@ transition: opacity 1s;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    position:relative;
 }
 
 .item .fa-check-circle, .item .fa-circle{
@@ -112,10 +106,6 @@ transition: opacity 1s;
 .lineThrough{
     text-decoration: line-through;
     color : #ccc;
-}
-
-.item{
-    position:relative;
 }
 
 .tooltip_delete .tooltip_text_delete{
@@ -201,5 +191,178 @@ transform: scale(1.2);
     background-color: transparent;
     border: none;
     font-size: 20px;
-    /* padding-left:10px; */
+}
+
+/* <----------------------------------- Event list ----------------------------------->  */
+.event_container{
+    width: 400px;
+    height: 400px;
+    margin-top:20px;
+    margin-left: 300px;
+    /* background-color: teal; */
+    float: left;
+}
+
+#event_input_box {
+    width: 100%;
+    font-size: 20px;
+    text-align: left;
+    background-color: lightblue;
+    visibility: hidden;
+    border-radius:15px;
+    margin-bottom:10px;
+}
+
+#event_input_box input[type=text] , #event_input_box input[type=datetime-local] , #event_input_box input[type=url] {
+    padding: 5px 5px;
+    margin: 3px 0;
+    font-size: 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}  
+
+.event_box{
+    width: 400px;
+    height: 400px;
+    /* margin-top: 0px; */
+    /* background-color: teal; */   
+}
+
+.event_header{
+    width: 100%;
+    height: 100px;
+    color:white;
+    background-color: orange;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    position: relative;
+    font-family: 'Yeon Sung', cursive;
+    font-size: 30px;
+}
+
+.event_header p{
+    margin:0;
+    padding-left: 10px;
+}
+
+.event_header button{
+    width: 100px;
+    height:30px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.event_header #done_button{
+    visibility: hidden;
+    position: relative;
+    left: -120px;
+}
+
+.event_header #edit_done_button{
+    visibility: hidden;
+    position: relative;
+    left: -240px;
+}
+
+.clear , .clear_events{
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	right: 20px;
+	top: 20px;
+}
+
+.clear_events #clear_events_tooltip_text{
+    visibility: hidden;
+    background-color:black;
+    color: white;
+    position:absolute;
+    left: 200%;
+    top:0%;
+    border-radius: 5px;
+    width:fit-content;
+    padding: 2px;
+    opacity: 0;
+    transition: opacity 1s;
+    font-size: 20px;
+    z-index: 2;
+}
+    
+.clear_events:hover #clear_events_tooltip_text{
+        visibility: visible;
+        opacity: 1;
+}
+
+.div_list_of_events{
+    height: 300px;
+	max-height: 300px;
+	overflow: auto;
+    background-color: white;
+}
+
+#event_list li{
+    margin-bottom: 2%;
+}
+
+.event_item{
+    width:380px;
+    min-height: 45px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    list-style: none;
+    display: flex;
+    justify-content:left;
+    align-items: center;
+    position:relative;
+}
+
+
+.div_name_link{
+    margin-left:2%;
+    margin-right: 3%;
+    width:45%;
+    font-size: 20px;
+}
+
+.div_date_time{
+    width: 25%;
+    margin-right: 5%;
+    text-align: center;
+    font-weight: 600;
+    font-size: large;
+}
+
+.div_edit_delete{
+    width: 20%;
+    text-align: center;
+}
+.div_list_of_events ul{
+    padding: 0px;
+}
+
+.check_flex{
+    display: flex;
+    flex-direction: column;
+}
+
+.edit_event button{
+    cursor:pointer;
+    /* margin-left: 10%; */
+    margin-bottom: 5%;
+    font-size: 15px;
+}
+
+.delete_event button{
+    cursor:pointer;
+    /* margin-left: 10%; */
+    margin-bottom: 5%;
+    font-size: 15px;
+}
+
+.extra_div{
+    height: 30px;
+    background-color: green;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
